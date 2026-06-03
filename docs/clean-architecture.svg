@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="600" height="700" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="300" y="40" text-anchor="middle" font-size="23" font-weight="700" fill="#1b262c">Clean Architecture — Dependency Flow</text>
+  <text x="300" y="66" text-anchor="middle" font-size="14" fill="#5a6470">Outer layers depend inward · the Domain depends on nothing</text>
+
+  <defs>
+    <clipPath id="topHalf"><rect x="0" y="0" width="600" height="360"/></clipPath>
+  </defs>
+
+  <!-- Outer ring split in two: bottom = Infrastructure, top = Api -->
+  <circle cx="300" cy="360" r="280" fill="#6a040f"/>
+  <circle cx="300" cy="360" r="280" fill="#7048e8" clip-path="url(#topHalf)"/>
+
+  <!-- Divider line (visible only across the outer ring; inner circles cover the middle) -->
+  <line x1="20" y1="360" x2="580" y2="360" stroke="#ffffff" stroke-width="2.5"/>
+
+  <!-- Application ring -->
+  <circle cx="300" cy="360" r="185" fill="#1d3557" stroke="#ffffff" stroke-width="3"/>
+
+  <!-- Domain core -->
+  <circle cx="300" cy="360" r="95" fill="#1b4332" stroke="#ffffff" stroke-width="3"/>
+
+  <!-- Api (top half of outer ring) -->
+  <text x="300" y="135" text-anchor="middle" font-size="18" font-weight="700" fill="#ffffff" letter-spacing="1">API</text>
+  <text x="300" y="158" text-anchor="middle" font-size="12.5" fill="#e9e2ff">PaymentsController · Request/Response models</text>
+
+  <!-- Infrastructure (bottom half of outer ring) -->
+  <text x="300" y="560" text-anchor="middle" font-size="18" font-weight="700" fill="#ffffff" letter-spacing="1">INFRASTRUCTURE</text>
+  <text x="300" y="583" text-anchor="middle" font-size="12.5" fill="#ffe3e3">BankSimulatorClient · InMemoryPaymentRepository</text>
+
+  <!-- Application ring label -->
+  <text x="300" y="222" text-anchor="middle" font-size="16" font-weight="700" fill="#cfe0ff" letter-spacing="1">APPLICATION</text>
+  <text x="300" y="243" text-anchor="middle" font-size="12" fill="#e6efff">PaymentService · IBankSimulatorClient</text>
+
+  <!-- Domain core label -->
+  <text x="300" y="345" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff" letter-spacing="1">DOMAIN</text>
+  <text x="300" y="365" text-anchor="middle" font-size="11" fill="#d8f3e3">Payment · Value Objects</text>
+  <text x="300" y="382" text-anchor="middle" font-size="11" fill="#d8f3e3">IPaymentRepository</text>
+
+  <!-- Legend -->
+  <g font-size="13" fill="#1b262c">
+    <rect x="70"  y="660" width="14" height="14" fill="#7048e8"/>
+    <text x="90"  y="672">Api</text>
+    <rect x="150" y="660" width="14" height="14" fill="#1d3557"/>
+    <text x="170" y="672">Application</text>
+    <rect x="270" y="660" width="14" height="14" fill="#1b4332"/>
+    <text x="290" y="672">Domain</text>
+    <rect x="360" y="660" width="14" height="14" fill="#6a040f"/>
+    <text x="380" y="672">Infrastructure</text>
+  </g>
+</svg>

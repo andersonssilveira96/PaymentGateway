@@ -19,12 +19,14 @@ docker-compose.yml               # Starts the bank simulator on localhost:8080
 PaymentGateway.sln
 ```
 
-Dependency flow:
-```
-Api → Application → Domain
-Api → Infrastructure → Domain
-     Infrastructure → Application
-```
+### Dependency flow
+
+All dependencies point **inward** — the Domain depends on nothing. The outer layers depend on the inner ones through interfaces, never the reverse. Api and Infrastructure form the outermost layer: the Api drives the use cases, while the Infrastructure implements the ports they define.
+
+<p align="center">
+  <img src="docs/clean-architecture.svg" alt="Clean Architecture dependency flow — concentric rings with Api on top and Infrastructure on the bottom of the outer layer" width="520"/>
+</p>
+
 
 ## Endpoints
 
