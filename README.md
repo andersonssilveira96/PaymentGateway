@@ -1,6 +1,6 @@
 # Payment Gateway
 
-A payment gateway REST API built in .NET 10 as part of the Checkout.com engineering assessment.
+A payment gateway REST API built in .NET 10.
 
 ## Architecture
 
