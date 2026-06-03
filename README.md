@@ -175,3 +175,4 @@ This would allow, for example:
 - **Independent scaling** — read-heavy traffic handled separately from payment processing.
 
 For the current requirements (two endpoints, one in-memory store) this would be over-engineering.
+
