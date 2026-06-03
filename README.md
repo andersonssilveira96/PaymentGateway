@@ -117,26 +117,9 @@ Retrying on any error where a response was received — or where the request was
 
 Authentication and authorization are out of scope for this assessment, but in a production payment gateway the following would be mandatory.
 
-### Merchant authentication (API Keys / OAuth 2.0)
+### Authentication & authorization
 
-Every request must be authenticated. Two common approaches:
-
-**API Keys**
-- Each merchant receives a secret key issued at onboarding
-- Key is sent in the `Authorization: Bearer <key>` header
-- Gateway validates the key on every request and resolves the merchant identity from it
-- Keys are stored hashed (e.g. HMAC-SHA256) — the plaintext is never stored
-
-**OAuth 2.0 Client Credentials**
-- Merchant authenticates against an identity server and receives a short-lived JWT
-- Gateway validates the JWT signature and expiry on every request — no roundtrip to the identity server
-- Token rotation is managed by the client, reducing the blast radius of a leaked credential
-
-### Authorization — merchants can only see their own payments
-
-The `GET /api/payments/{id}` endpoint must verify that the authenticated merchant is the owner of the payment being retrieved. Without this, a merchant could enumerate other merchants' payment IDs and retrieve sensitive card data.
-
-Implementation: attach `merchantId` to every `Payment` entity at creation time; the query layer filters by both `id` and the `merchantId` resolved from the authenticated principal.
+Every request would be authenticated (API Key or OAuth 2.0 client credentials) and scoped to the calling merchant — a `merchantId` on each `Payment` ensures a merchant can only retrieve its own payments, preventing id enumeration across tenants.
 
 ### Rate limiting
 
@@ -149,6 +132,8 @@ A merchant retrying a failed request could unknowingly submit the same payment t
 ---
 
 ## Possible future improvements
+
+Beyond the items below, natural next steps for a production system would include a persistent database, caching for read-heavy retrieval, and asynchronous processing of payments.
 
 ### Circuit Breaker
 
