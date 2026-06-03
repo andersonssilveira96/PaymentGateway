@@ -6,6 +6,10 @@ A payment gateway REST API built in .NET 10 as part of the Checkout.com engineer
 
 The solution follows **Clean Architecture / DDD** principles, divided into four projects:
 
+<p align="center">
+  <img src="docs/clean-architecture.svg" alt="Clean Architecture onion diagram for the Payment Gateway" width="560"/>
+</p>
+
 ```
 src/
   PaymentGateway.Domain          # Entities, value objects, enums, repository interfaces — no external dependencies

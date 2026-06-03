@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 800" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="760" height="800" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="380" y="44" text-anchor="middle" font-size="26" font-weight="700" fill="#1b262c">Clean Architecture — Payment Gateway</text>
+  <text x="380" y="72" text-anchor="middle" font-size="15" fill="#5a6470">Dependencies point inward · the Domain depends on nothing</text>
+
+  <!-- Concentric rings (outer to inner) -->
+  <circle cx="380" cy="440" r="320" fill="#6a040f"/>
+  <circle cx="380" cy="440" r="240" fill="#1d3557"/>
+  <circle cx="380" cy="440" r="165" fill="#2d6a4f"/>
+  <circle cx="380" cy="440" r="95"  fill="#1b4332"/>
+
+  <!-- Ring 4: Infrastructure & Presentation -->
+  <text x="380" y="155" text-anchor="middle" font-size="17" font-weight="700" fill="#ffd6d6" letter-spacing="1">INFRASTRUCTURE &amp; PRESENTATION</text>
+  <text x="380" y="178" text-anchor="middle" font-size="12.5" fill="#ffeaea">PaymentsController · BankSimulatorClient (HTTP + Polly)</text>
+  <text x="380" y="196" text-anchor="middle" font-size="12.5" fill="#ffeaea">InMemoryPaymentRepository · DI composition root</text>
+
+  <!-- Ring 3: Application -->
+  <text x="380" y="245" text-anchor="middle" font-size="16" font-weight="700" fill="#cfe0ff" letter-spacing="1">APPLICATION</text>
+  <text x="380" y="267" text-anchor="middle" font-size="12.5" fill="#e6efff">PaymentService (use case) · IBankSimulatorClient</text>
+
+  <!-- Ring 2: Domain Services / Ports -->
+  <text x="380" y="318" text-anchor="middle" font-size="15" font-weight="700" fill="#c5e8d5" letter-spacing="1">DOMAIN SERVICES</text>
+  <text x="380" y="338" text-anchor="middle" font-size="12.5" fill="#dbf2e6">IPaymentRepository (port)</text>
+
+  <!-- Core: Domain Model -->
+  <text x="380" y="424" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff" letter-spacing="1">DOMAIN</text>
+  <text x="380" y="446" text-anchor="middle" font-size="11.5" fill="#d8f3e3">Payment · Money</text>
+  <text x="380" y="463" text-anchor="middle" font-size="11.5" fill="#d8f3e3">CardNumber · Cvv</text>
+  <text x="380" y="480" text-anchor="middle" font-size="11.5" fill="#d8f3e3">ExpiryDate</text>
+
+  <!-- Inward dependency arrow -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#1b262c"/>
+    </marker>
+  </defs>
+  <line x1="725" y1="440" x2="470" y2="440" stroke="#1b262c" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="735" y="436" text-anchor="end" font-size="13" font-weight="600" fill="#1b262c" transform="rotate(-90 735 436)">dependencies point inward</text>
+
+  <!-- Legend -->
+  <g font-size="13" fill="#1b262c">
+    <rect x="120" y="770" width="14" height="14" fill="#1b4332"/>
+    <text x="140" y="782">Domain</text>
+    <rect x="225" y="770" width="14" height="14" fill="#2d6a4f"/>
+    <text x="245" y="782">Domain Services</text>
+    <rect x="385" y="770" width="14" height="14" fill="#1d3557"/>
+    <text x="405" y="782">Application</text>
+    <rect x="500" y="770" width="14" height="14" fill="#6a040f"/>
+    <text x="520" y="782">Infrastructure &amp; Api</text>
+  </g>
+</svg>
