@@ -153,6 +153,9 @@ coverage*.info
 coverage-results/
 coverage-report/
 
+# Private interview prep — not part of the submission
+INTERVIEW.md
+
 # Visual Studio code coverage results
 *.coverage
 *.coveragexml

@@ -13,18 +13,46 @@ src/
   PaymentGateway.Infrastructure  # InMemoryPaymentRepository, BankSimulatorClient (HTTP + Polly retry)
   PaymentGateway.Api             # Controllers, request/response models, DI composition root
 test/
-  PaymentGateway.Api.Tests       # Integration tests using WebApplicationFactory
+  PaymentGateway.Api.Tests       # Unit tests (domain, application) + integration tests (WebApplicationFactory)
 imposters/                       # Bank simulator configuration (Mountebank) — do not modify
 docker-compose.yml               # Starts the bank simulator on localhost:8080
 PaymentGateway.sln
 ```
 
-Dependency flow:
+### Dependency flow
+
+All dependencies point **inward** — the Domain has no knowledge of any outer layer. Infrastructure implements the ports (interfaces) defined by the inner layers, wired together at the Api composition root.
+
+```mermaid
+flowchart TD
+    Api["<b>Api</b><br/>PaymentsController<br/>Request/Response models"]
+    App["<b>Application</b><br/>PaymentService (use case)<br/><i>IBankSimulatorClient</i> (port)"]
+    Dom["<b>Domain</b><br/>Payment, Value Objects<br/><i>IPaymentRepository</i> (port)"]
+    Inf["<b>Infrastructure</b><br/>BankSimulatorClient (HTTP + Polly)<br/>InMemoryPaymentRepository"]
+
+    Api --> App
+    Api --> Inf
+    App --> Dom
+    Inf --> App
+    Inf --> Dom
+
+    Inf -. implements .-> App
+    Inf -. implements .-> Dom
+
+    classDef domain fill:#2d6a4f,stroke:#1b4332,color:#fff;
+    classDef app fill:#1d3557,stroke:#0d1b2a,color:#fff;
+    classDef infra fill:#6a040f,stroke:#370617,color:#fff;
+    classDef api fill:#7048e8,stroke:#3c1a78,color:#fff;
+    class Dom domain;
+    class App app;
+    class Inf infra;
+    class Api api;
 ```
-Api → Application → Domain
-Api → Infrastructure → Domain
-     Infrastructure → Application
-```
+
+- **Domain** depends on nothing — pure business rules.
+- **Application** depends only on Domain; it defines `IBankSimulatorClient` as an outbound port.
+- **Infrastructure** implements the ports (`IPaymentRepository`, `IBankSimulatorClient`) — it depends inward, never the other way around.
+- **Api** is the composition root that wires concrete implementations to interfaces via DI.
 
 ## Endpoints
 
